@@ -1,0 +1,17 @@
+[
+    {
+        "value": "dark",
+        "label": "Dark",
+        "icon": "bi bi-moon-stars-fill"
+    },
+    {
+        "value": "light",
+        "label": "Light",
+        "icon": "bi bi-brightness-high-fill"
+    },
+    {
+        "value": "default",
+        "label": "System",
+        "icon": "bi bi-circle-half"
+    }
+]

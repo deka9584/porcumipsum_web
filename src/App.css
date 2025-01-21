@@ -1,0 +1,61 @@
+@import url('bootstrap');
+@import url('bootstrap-icons');
+
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+.app-navbar {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+}
+
+.fold-mode-btn {
+  border-radius: 50%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.pig-icon-container > .bi {
+  width: 10rem;
+  height: 10rem;
+  max-width: 100%;
+}
+
+.modal-nav-btn:disabled {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.picker-result {
+  min-height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-display {
+  background-color: white;
+  height: auto;
+  margin: 0 auto;
+  max-width: 128px;
+  padding: .75rem;
+  width: 100%;
+}
+
+.paragraph-preview {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3; 
+  -webkit-box-orient: vertical;
+}

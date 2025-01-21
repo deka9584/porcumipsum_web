@@ -1,0 +1,5 @@
+{
+    "developmentApiUrl": "http://salaandrea.altervista.org/porcumipsum/api.php",
+    "productionApiUrl": "./api.php",
+    "historyLimit": 10
+}
