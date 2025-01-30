@@ -12,13 +12,13 @@ function LangDropdown () {
 
     return (
         <Dropdown>
-            <Dropdown.Toggle variant="link text-body text-decoration-none text-uppercase">
+            <Dropdown.Toggle variant="link" className="text-body text-decoration-none text-uppercase">
                 {i18n.language}
             </Dropdown.Toggle>
             <Dropdown.Menu>
                 {languages.map((item, index) => (
                     <Dropdown.Item key={index} onClick={() => changeLang(item)} active={item === i18n.language}>
-                        <span className="ms-2 text-uppercase">{item}</span>
+                        <span className="text-uppercase">{item}</span>
                     </Dropdown.Item>
                 ))}
             </Dropdown.Menu>

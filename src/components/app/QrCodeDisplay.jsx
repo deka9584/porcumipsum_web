@@ -15,22 +15,28 @@ function QrCodeDisplay ({ qrText, back }) {
     const qrCodeSvgRef = useRef();
 
     const generateDownloadUrls = useCallback(() => {
-        const svgString = serializeSvgElement(qrCodeSvgRef.current);
-        const img = new Image();
+        const svgEl = qrCodeSvgRef.current;
+        
+        if (!svgEl) {
+            console.error("Unable to generate download urls:", svgEl);
+            return;
+        }
 
-        img.src = svgString;
+        const svgString = serializeSvgElement(svgEl);
+        const img = new Image();
 
         img.onload = () => {
             const canvas = document.createElement("canvas");
             const ctx = canvas.getContext("2d");
 
-            canvas.width = qrCodeSvgRef.current.getAttribute("width");
-            canvas.height = qrCodeSvgRef.current.getAttribute("height");
+            canvas.width = parseInt(svgEl.getAttribute("width"));
+            canvas.height = parseInt(svgEl.getAttribute("height"));
 
             ctx.drawImage(img, 0, 0);
             setPngDataUrl(canvas.toDataURL("image/png"));
         }
 
+        img.src = svgString;
         setSvgDataUrl(svgString);
     }, []);
 
@@ -54,7 +60,7 @@ function QrCodeDisplay ({ qrText, back }) {
     }
 
     const toggleShareUrl = () => {
-        setShareUrl(prev => !prev ? createShareUrl() : null);
+        setShareUrl(prev => prev ? null : createShareUrl());
     }
 
     useEffect(() => {
