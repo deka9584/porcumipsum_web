@@ -9,15 +9,30 @@ function ShareInput ({ text, className, close }) {
     const inputRef = useRef();
 
     const clipboardCopy = () => {
+        inputRef.current?.focus();
         inputRef.current?.select();
         
-        navigator.clipboard?.writeText(text).then(() => {
-            setCopied(true);
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).then(() => onTextCopied());
+            return;
+        }
 
-            setTimeout(() => {
-                setCopied(false);
-            }, 1000);
-        });
+        try {
+            if (document.execCommand("copy")) {
+                onTextCopied();
+            }
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+
+    const onTextCopied = () => {
+        setCopied(true);
+    
+        setTimeout(() => {
+            setCopied(false);
+        }, 1000);
     }
 
     return (
