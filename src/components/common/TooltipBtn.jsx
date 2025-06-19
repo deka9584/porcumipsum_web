@@ -1,7 +1,7 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-function TooltipBtn ({ tooltipText = "", type = "button", id, variant, className, href, onClick, children }) {
+function TooltipBtn ({ tooltipText = "", type = "button", disabled = false, id, variant, className, href, onClick, children }) {
     const navigate = useNavigate();
 
     const tooltip = (
@@ -21,7 +21,7 @@ function TooltipBtn ({ tooltipText = "", type = "button", id, variant, className
 
     return (
         <OverlayTrigger overlay={tooltip}>
-            <Button id={id} variant={variant} className={className} type={type} onClick={clickHandler} aria-label={tooltipText}>
+            <Button id={id} variant={variant} className={className} type={type} onClick={clickHandler} aria-label={tooltipText} disabled={disabled}>
                 {children}
             </Button>
         </OverlayTrigger>

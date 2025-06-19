@@ -13,12 +13,14 @@ function ShareInput ({ text, className, close }) {
         inputRef.current?.select();
         
         if (navigator.clipboard) {
-            navigator.clipboard.writeText(text).then(() => onTextCopied());
+            setCopied(true);
+            navigator.clipboard.writeText(text).then(onTextCopied);
             return;
         }
 
         try {
             if (document.execCommand("copy")) {
+                setCopied(true);
                 onTextCopied();
             }
         }
@@ -28,11 +30,7 @@ function ShareInput ({ text, className, close }) {
     }
 
     const onTextCopied = () => {
-        setCopied(true);
-    
-        setTimeout(() => {
-            setCopied(false);
-        }, 1000);
+        setTimeout(() => setCopied(false), 1000);
     }
 
     return (
