@@ -31,20 +31,6 @@ function FavouritesList({ generateQr, show }) {
                 </Alert>
             )}
 
-            {deleteItem && (
-                <Alert variant="danger" onClose={() => setDeleteItem(null)} dismissible>
-                    <p>{t("DeleteFromFavourites", { item: deleteItem })}</p>
-                    <div className="hstack gap-2">
-                        <Button variant="outline-danger" size="sm" type="button" onClick={confirmDelete}>
-                            {t("Confirm")}
-                        </Button>
-                        <Button variant="outline-secondary" size="sm" type="button" onClick={() => setDeleteItem(null)}>
-                            {t("Cancel")}
-                        </Button>
-                    </div>
-                </Alert>
-            )}
-
             <ListGroup>
                 {list.map((item, index) => (
                     <ListGroup.Item key={index} className="hstack gap-3">
@@ -55,9 +41,22 @@ function FavouritesList({ generateQr, show }) {
                             <TooltipBtn variant="link" tooltipText={t("GenerateQR")} className="p-0" onClick={() => generateQr(item)}>
                                 <i className="bi bi-qr-code-scan text-success"></i>
                             </TooltipBtn>
-                            <TooltipBtn variant="link" tooltipText={t("Remove")} className="p-0" onClick={() => setDeleteItem(item)}>
-                                <i className="bi bi-trash text-danger"></i>
-                            </TooltipBtn>
+                            {item === deleteItem ? (
+                                <div className="d-flex flex-wrap align-items-center gap-1">
+                                    <i className="bi bi-trash text-danger"></i>
+                                    <Button type="button" variant="link" className="p-0 text-decoration-none" onClick={confirmDelete}>
+                                        <small className="text-danger">{t("Confirm")}</small>
+                                    </Button>
+                                    <Button type="button" variant="link" className="p-0 text-decoration-none" onClick={() => setDeleteItem(null)}>
+                                        <small className="text-secondary">{t("Cancel")}</small>
+                                    </Button>
+                                </div>
+                            ) : (
+                                <TooltipBtn variant="link" tooltipText={t("Remove")} className="p-0" onClick={() => setDeleteItem(item)}>
+                                    <i className="bi bi-trash text-danger"></i>
+                                </TooltipBtn>
+                            )}
+                            
                         </div>
                     </ListGroup.Item>
                 ))}
