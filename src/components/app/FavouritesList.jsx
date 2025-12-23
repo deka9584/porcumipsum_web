@@ -42,14 +42,16 @@ function FavouritesList({ generateQr, show }) {
                                 <i className="bi bi-qr-code-scan text-success"></i>
                             </TooltipBtn>
                             {item === deleteItem ? (
-                                <div className="d-flex flex-wrap align-items-center gap-1">
+                                <div className="d-flex align-items-center gap-1">
                                     <i className="bi bi-trash text-danger"></i>
-                                    <Button type="button" variant="link" className="p-0 text-decoration-none" onClick={confirmDelete}>
-                                        <small className="text-danger">{t("Confirm")}</small>
-                                    </Button>
-                                    <Button type="button" variant="link" className="p-0 text-decoration-none" onClick={() => setDeleteItem(null)}>
-                                        <small className="text-secondary">{t("Cancel")}</small>
-                                    </Button>
+                                    <div className="d-flex flex-wrap flex-column flex-sm-row align-items-center gap-sm-1">
+                                        <Button type="button" variant="link" className="p-0 text-decoration-none" onClick={confirmDelete}>
+                                            <small className="text-danger">{t("Confirm")}</small>
+                                        </Button>
+                                        <Button type="button" variant="link" className="p-0 text-decoration-none" onClick={() => setDeleteItem(null)}>
+                                            <small className="text-secondary">{t("Cancel")}</small>
+                                        </Button>
+                                    </div>
                                 </div>
                             ) : (
                                 <TooltipBtn variant="link" tooltipText={t("Remove")} className="p-0" onClick={() => setDeleteItem(item)}>
