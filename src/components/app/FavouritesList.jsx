@@ -58,7 +58,6 @@ function FavouritesList({ generateQr, show }) {
                                     <i className="bi bi-trash text-danger"></i>
                                 </TooltipBtn>
                             )}
-                            
                         </div>
                     </ListGroup.Item>
                 ))}

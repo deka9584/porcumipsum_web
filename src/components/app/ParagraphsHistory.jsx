@@ -15,10 +15,6 @@ function ParagraphsHistory ({ onSelect, show }) {
         setDeleteItem(null);
     }
 
-    const cancelDelete = () => {
-        setDeleteItem(null);
-    }
-
     const formatDate = (date) => {
         return new Date(date).toLocaleString();
     }
@@ -31,21 +27,7 @@ function ParagraphsHistory ({ onSelect, show }) {
         <div>
             {history.length === 0 && (
                 <Alert variant="info">
-                    <p>{t("NoItemsToDisplay")}</p>
-                </Alert>
-            )}
-
-            {deleteItem && (
-                <Alert variant="danger" onClose={cancelDelete} dismissible>
-                    <p>{t("DeleteFromParHistory", { index: history.indexOf(deleteItem) + 1, date: formatDate(deleteItem.createdAt) })}</p>
-                    <div className="hstack gap-2">
-                        <Button variant="outline-danger" size="sm" type="button" onClick={confirmDelete}>
-                            {t("Confirm")}
-                        </Button>
-                        <Button variant="outline-secondary" size="sm" type="button" onClick={cancelDelete}>
-                            {t("Cancel")}
-                        </Button>
-                    </div>
+                    <p className="m-0">{t("NoItemsToDisplay")}</p>
                 </Alert>
             )}
 
@@ -56,9 +38,22 @@ function ParagraphsHistory ({ onSelect, show }) {
                             <Button variant="link" className="p-0 text-decoration-none" onClick={() => onSelect(item.paragraphs)}>
                                 #{index + 1} - {formatDate(item.createdAt)}
                             </Button>
-                            <TooltipBtn variant="link" tooltipText={t("Delete")} className="p-0" onClick={() => setDeleteItem(item)}>
-                                <i className="bi bi-trash text-danger"></i>
-                            </TooltipBtn>
+                            {item === deleteItem ? (
+                                <div className="d-flex align-items-center gap-1">
+                                    <div className="d-flex flex-wrap flex-column flex-sm-row align-items-center gap-sm-1">
+                                        <Button type="button" variant="link" className="p-0 text-decoration-none" onClick={confirmDelete}>
+                                            <small className="text-danger">{t("Delete")}</small>
+                                        </Button>
+                                        <Button type="button" variant="link" className="p-0 text-decoration-none" onClick={() => setDeleteItem(null)}>
+                                            <small className="text-secondary">{t("Cancel")}</small>
+                                        </Button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <TooltipBtn variant="link" tooltipText={t("Remove")} className="p-0" onClick={() => setDeleteItem(item)}>
+                                    <i className="bi bi-trash text-danger"></i>
+                                </TooltipBtn>
+                            )}
                         </div>
                         {item.paragraphs && item.paragraphs.length > 0 ? (
                             <p className="mb-0 paragraph-preview text-muted">
